@@ -1,3 +1,4 @@
+// It has a LIMIT between 1.4e16 and 1.5e16. In the future I will try to solve it
 function SumatoryFibonacciEvens(n) {
   let last = 1;
   let beforeLast = 0;
