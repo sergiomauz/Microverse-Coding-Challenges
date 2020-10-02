@@ -12,15 +12,15 @@ class LinkedList
 
   def initialize
     @first = nil
-    @last = nil
+    @last = nil    
     @count = 0
   end
 
-  def add(value)
+  def add(value)       
     if @last
       new_node = Node.new(value)
       @last.next = new_node
-      @last = @last.next      
+      @last = @last.next
     else
       @first = Node.new(value)
       @last = @first
@@ -108,17 +108,20 @@ class LinkedList
 end
 
 class Stack
-  attr_accessor :list
+  attr_accessor :list, :list_mins
 
   def initialize
     @list = LinkedList.new
+    @list_mins = LinkedList.new
   end
 
-  def push(value)       
+  def push(value)
     if @list.first
       @list.add_at(0, value)
+      @list_mins.add_at(0, value) if value < @list_mins.first.value
     else
       @list.add(value)
+      @list_mins.add(value)
     end    
   end
 
@@ -126,25 +129,35 @@ class Stack
     popped = -1
     if @list.first
       popped = @list.get(0)      
-      @list.remove(0)      
+      @list.remove(0)
+
+      @list_mins.remove(0) if popped == @list_mins.first.value
     end
     popped
   end
+
+  def min
+    @list_mins.first.value
+  end
 end
+
+
 
 stack = Stack.new
 stack.push(3)
 stack.push(5)
-puts stack.pop
-# => 5
+puts stack.min
+# => 3
+
+stack.pop
+stack.push(7)
+puts stack.min
+# => 3
 
 stack.push(2)
-stack.push(7)
-puts stack.pop
-# => 7
-
-puts stack.pop
+puts stack.min
 # => 2
 
-puts stack.pop
+stack.pop
+puts stack.min
 # => 3
