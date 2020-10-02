@@ -110,15 +110,43 @@ class LinkedList {
   }
 }
 
-const list = new LinkedList();
+class Stack {
+  constructor() {
+    this.list = null;
+  }
 
-list.add(3)
-list.add(5)
-list.add_at(1, 11)
-list.add_at(0, 13)
+  push(value) {
+    if (this.list) {
+      this.list.add_at(0, value);
+    } else {
+      this.list = new LinkedList();
+      this.list.add(value);
+    }
+  }
 
-console.log(list.get(2))
-// => 11
+  pop() {
+    if (this.list) {
+      let popped = this.list.get(0);
+      this.list.remove(0);
+      return popped;
+    }
+  }
+}
 
-console.log(list.get(3))
+const stack = new Stack();
+stack.push(3);
+stack.push(5);
+console.log(stack.pop());
 // => 5
+
+stack.push(2)
+stack.push(7)
+console.log(stack.pop());
+// => 7
+
+console.log(stack.pop());
+// => 2
+
+console.log(stack.pop());
+// => 3
+

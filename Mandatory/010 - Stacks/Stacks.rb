@@ -1,5 +1,5 @@
 class Node
-  attr_accessor :value, :next
+  attr_accessor :value, :next      
 
   def initialize(value)
     @value = value
@@ -107,16 +107,44 @@ class LinkedList
   end
 end
 
+class Stack
+  attr_accessor :list
 
-list = LinkedList.new
+  def initialize
+    @list = nil
+  end
 
-list.add(3)
-list.add(5)
-list.add_at(1, 11)
-list.add_at(0, 13)
+  def push(value)       
+    if @list
+      @list.add_at(0, value)
+    else
+      @list = LinkedList.new
+      @list.add(value)
+    end    
+  end
 
-puts list.get(2)
-# => 11
+  def pop
+    if @list      
+      popped = @list.get(0)      
+      @list.remove(0)
+      popped
+    end
+  end
+end
 
-puts list.get(3)
+stack = Stack.new
+stack.push(3)
+stack.push(5)
+puts stack.pop
 # => 5
+
+stack.push(2)
+stack.push(7)
+puts stack.pop
+# => 7
+
+puts stack.pop
+# => 2
+
+puts stack.pop
+# => 3
