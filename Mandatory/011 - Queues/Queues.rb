@@ -107,44 +107,45 @@ class LinkedList
   end
 end
 
-class Stack
+class Queue
   attr_accessor :list
 
   def initialize
     @list = LinkedList.new
   end
 
-  def push(value)       
-    if @list.first
-      @list.add_at(0, value)
-    else
-      @list.add(value)
-    end    
-  end
+  def add(value)
+    @list.add(value)
+  end  
 
-  def pop
-    popped = -1
+  def remove
+    removed = -1
     if @list.first
-      popped = @list.get(0)      
-      @list.remove(0)      
+      removed = @list.get(0)
+      @list.remove(0)
     end
-    popped
-  end
+    removed
+  end  
 end
 
-stack = Stack.new
-stack.push(3)
-stack.push(5)
-puts stack.pop
+
+queue = Queue.new
+
+queue.add(3)
+queue.add(5)
+puts queue.remove
+# => 3
+
+queue.add(2)
+queue.add(7)
+puts queue.remove
 # => 5
 
-stack.push(2)
-stack.push(7)
-puts stack.pop
-# => 7
-
-puts stack.pop
+puts queue.remove
 # => 2
 
-puts stack.pop
-# => 3
+puts queue.remove
+# => 7
+
+puts queue.remove
+# => -1

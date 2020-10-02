@@ -95,20 +95,21 @@ class LinkedList:
 
 class Stack:
   def __init__(self):
-    self.list = None
+    self.list = LinkedList()
 
   def push(self, value):
-    if (self.list):
+    if (self.list.first):
       self.list.add_at(0, value)
     else:
-      self.list = LinkedList()
       self.list.add(value)
 
   def pop(self):
-    if (self.list):
+    popped = -1
+    if (self.list.first):
       popped = self.list.get(0)
       self.list.remove(0)
-      return popped
+    
+    return popped
 
 stack = Stack()
 stack.push(3)

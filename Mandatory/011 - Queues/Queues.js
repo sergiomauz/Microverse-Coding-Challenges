@@ -110,43 +110,45 @@ class LinkedList {
   }
 }
 
-class Stack {
+class Queue {
   constructor() {
     this.list = new LinkedList();
   }
 
-  push(value) {
-    if (this.list.first) {
-      this.list.add_at(0, value);
-    } else {
-      this.list.add(value);
-    }
+  add(value) {
+    this.list.add(value);
   }
 
-  pop() {
-    let popped = -1;
+  remove() {
+    let removed = -1;
     if (this.list.first) {
-      popped = this.list.get(0);
+      removed = this.list.get(0);
       this.list.remove(0);
     }
-    return popped;
+
+    return removed;
   }
 }
 
-const stack = new Stack();
-stack.push(3);
-stack.push(5);
-console.log(stack.pop());
-// => 5
 
-stack.push(2)
-stack.push(7)
-console.log(stack.pop());
-// => 7
 
-console.log(stack.pop());
-// => 2
+let queue = new Queue();
 
-console.log(stack.pop());
+queue.add(3);
+queue.add(5);
+console.log(queue.remove());
 // => 3
 
+queue.add(2)
+queue.add(7)
+console.log(queue.remove());
+// => 5
+
+console.log(queue.remove());
+// => 2
+
+console.log(queue.remove());
+// => 7
+
+console.log(queue.remove());
+// => -1
