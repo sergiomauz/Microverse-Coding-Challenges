@@ -110,45 +110,69 @@ class LinkedList {
   }
 }
 
-class Queue {
+class Stack {
   constructor() {
     this.list = new LinkedList();
   }
 
-  add(value) {
-    this.list.add(value);
+  push(value) {
+    if (this.list.first) {
+      this.list.add_at(0, value);
+    } else {
+      this.list.add(value);
+    }
   }
 
-  remove() {
-    let removed = -1;
+  pop() {
+    let popped = -1;
     if (this.list.first) {
-      removed = this.list.get(0);
+      popped = this.list.get(0);
       this.list.remove(0);
     }
-
-    return removed;
+    return popped;
   }
 }
 
+function balanced_brackets(evalString) {
+  let array_string = evalString.split('');
+  let evaluated_array = [];
+  let forced_finish = false;
+  let temp_stack = new Stack();
+  let item;
+
+  array_string.forEach(st => {
+    if (['(', ')', '{', '}', '[', ']'].includes(st)) {
+      evaluated_array.push(st);
+    }
+  });
+
+  for (let index = 0; index < evaluated_array.length; index += 1) {
+    item = evaluated_array[index];
+    if (item === '(') {
+      temp_stack.push(')');
+    } else if (item === '[') {
+      temp_stack.push(']');
+    } else if (item === '{') {
+      temp_stack.push('}');
+    } else {
+      if (!(temp_stack.list.first)) {
+        forced_finish = true;
+        break;
+      } else if (item === temp_stack.list.first.value) {
+        temp_stack.pop();
+      }
+    }
+  }
+
+  return (!(temp_stack.list.first) && !forced_finish);
+}
 
 
-let queue = new Queue();
+console.log(balanced_brackets('(hello)[world]'));
+// => true
 
-queue.add(3);
-queue.add(5);
-console.log(queue.remove());
-// => 3
+console.log(balanced_brackets('([)]'));
+// => false
 
-queue.add(2)
-queue.add(7)
-console.log(queue.remove());
-// => 5
-
-console.log(queue.remove());
-// => 2
-
-console.log(queue.remove());
-// => 7
-
-console.log(queue.remove());
-// => -1
+console.log(balanced_brackets('[({}{}{})([])]'));
+// => true

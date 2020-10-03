@@ -52,18 +52,18 @@ class LinkedList:
         old_node = self.first
         self.first = self.first.next
         old_node = None
-        self.count += 1
+        self.count -= 1
       elif (index == self.count - 1):
         old_node = self.last
         self.last = self.__get_node(index)
         old_node = None
-        self.count += 1
+        self.count -= 1
       elif (index > 0 and index < self.count):
         previous_node = self.__get_node(index)
         old_node = previous_node.next
         previous_node.next = old_node.next
         old_node = None
-        self.count += 1
+        self.count -= 1
 
     if (self.count == 0):
       self.first = None

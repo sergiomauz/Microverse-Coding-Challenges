@@ -93,16 +93,57 @@ class LinkedList:
     else:
       return None
 
+class Stack:
+  def __init__(self):
+    self.list = LinkedList()
 
-list = LinkedList()
+  def push(self, value):
+    if (self.list.first):
+      self.list.add_at(0, value)
+    else:
+      self.list.add(value)
 
-list.add(3)
-list.add(5)
-list.add_at(1, 11)
-list.add_at(0, 13)
+  def pop(self):
+    popped = -1
+    if (self.list.first):
+      popped = self.list.get(0)
+      self.list.remove(0)
+    
+    return popped
 
-print(list.get(2))
-# => 11
 
-print(list.get(3))
-# => 5
+def balanced_brackets(evalString):
+  array_string = list(evalString)
+  evaluated_array = []
+  forced_finish = False
+  temp_stack = Stack()
+
+  for st in array_string:
+    if (st in ['(', ')', '{', '}', '[', ']']):
+      evaluated_array.append(st)
+
+  for item in evaluated_array:  
+    if (item == '('):
+      temp_stack.push(')')
+    elif (item == '['):
+      temp_stack.push(']')
+    elif (item == '{'):
+      temp_stack.push('}')
+    else:
+      if (not temp_stack.list.first):
+        forced_finish = true
+        break
+      elif (item == temp_stack.list.first.value):
+        temp_stack.pop()
+  
+  return ((not temp_stack.list.first) and (not forced_finish))
+
+
+print(balanced_brackets('(hello)[world]'))
+# => true
+
+print(balanced_brackets('([)]'))
+# => false
+
+print(balanced_brackets("[({}{}{})([])]"))
+# => true  

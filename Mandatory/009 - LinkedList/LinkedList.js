@@ -76,18 +76,18 @@ class LinkedList {
         old_node = this.first;
         this.first = this.first.next;
         old_node = null;
-        this.count += 1;
+        this.count -= 1;
       } else if (index === this.count - 1) {
         old_node = this.last;
         this.last = this.get_node(index);
         old_node = null;
-        this.count += 1
+        this.count -= 1
       } else if (index > 0 && index < this.count) {
         previous_node = this.get_node(index);
         old_node = previous_node.next;
         previous_node.next = old_node.next;
         old_node = null;
-        this.count += 1;
+        this.count -= 1;
       }
     }
 
