@@ -1,6 +1,6 @@
 function timeInWords(h, m) {
-  const stringHours = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
-  const stringMinutes = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve',
+  const stringHours = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
+  const stringMinutes = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve',
     'thirteen', 'fourteen', 'quarter', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twenty one', 'twenty two',
     'twenty three', 'twenty four', 'twenty five', 'twenty six', 'twenty seven', 'twenty eight', 'twenty nine', 'half'];
 
@@ -18,13 +18,13 @@ function timeInWords(h, m) {
   if (newHour > 12) { newHour = 1; }
 
   if (newMinutes === 0) {
-    stringTime = `${stringHours[newHour]} o' clock`;
+    stringTime = `${stringHours[newHour - 1]} o' clock`;
   } else if (newMinutes === 1) {
-    stringTime = `${stringMinutes[newMinutes]} minute ${hourStringPrefix} ${stringHours[newHour]}`;
+    stringTime = `${stringMinutes[newMinutes - 1]} minute ${hourStringPrefix} ${stringHours[newHour - 1]}`;
   } else if (newMinutes === 15 || newMinutes === 30) {
-    stringTime = `${stringMinutes[newMinutes]} ${hourStringPrefix} ${stringHours[newHour]}`;
+    stringTime = `${stringMinutes[newMinutes - 1]} ${hourStringPrefix} ${stringHours[newHour - 1]}`;
   } else {
-    stringTime = `${stringMinutes[newMinutes]} minutes ${hourStringPrefix} ${stringHours[newHour]}`;
+    stringTime = `${stringMinutes[newMinutes - 1]} minutes ${hourStringPrefix} ${stringHours[newHour - 1]}`;
   }
 
   return stringTime;
