@@ -1,4 +1,4 @@
-def binary_tree_height(array_tree):
+def binary_tree_height(array_tree):    
   level = 1
   while (len(array_tree) > (2 ** level) - 1):
     level += 1
